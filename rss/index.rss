@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Tech and Life</title><description>Thoughts, stories and ideas.</description><link>http://localhost:2368/</link><generator>Ghost 0.9</generator><lastBuildDate>Thu, 04 Aug 2016 20:23:04 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Add Two Numbers With Bit Operation</title><description>&lt;h6 id="question"&gt;Question：&lt;/h6&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Tech and Life</title><description>Thoughts, stories and ideas.</description><link>http://localhost:2368/</link><generator>Ghost 0.9</generator><lastBuildDate>Thu, 04 Aug 2016 20:36:34 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Add Two Numbers With Bit Operation</title><description>&lt;h6 id="question"&gt;Question：&lt;/h6&gt;
 
 &lt;p&gt;Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -. &lt;/p&gt;
 
@@ -283,23 +283,17 @@ ng-checked     [checked]
 
 &lt;p&gt;多多学习Facebook的React.js。很多伟大的理念都是从这里传播出去的，比如Flux。&lt;/p&gt;
 
-&lt;p&gt;放眼一看，Angular1和2两个版本的共同点很少。2.0版本看起来是要做彻底的改变。因此有必要抽点时间去研究下心的框架，从而可以快速的成为专家。&lt;/p&gt;</content:encoded></item><item><title>JavaScript Scope and Closure</title><description>&lt;h2 id=""&gt;目标&lt;/h2&gt;
-
-&lt;p&gt;无具体目标&lt;/p&gt;
-
-&lt;h2 id=""&gt;知识点&lt;/h2&gt;
+&lt;p&gt;放眼一看，Angular1和2两个版本的共同点很少。2.0版本看起来是要做彻底的改变。因此有必要抽点时间去研究下心的框架，从而可以快速的成为专家。&lt;/p&gt;</content:encoded></item><item><title>Javascript closure</title><description>&lt;h4 id="notes"&gt;Notes&lt;/h4&gt;
 
 &lt;ol&gt;
-&lt;li&gt;理解 js 中 var 的作用域  &lt;/li&gt;
-&lt;li&gt;了解闭包的概念  &lt;/li&gt;
-&lt;li&gt;理解 this 的指向&lt;/li&gt;
+&lt;li&gt;JS var scope  &lt;/li&gt;
+&lt;li&gt;Learn JS closure  &lt;/li&gt;
+&lt;li&gt;Understand how to use this&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=""&gt;课程内容&lt;/h2&gt;
+&lt;h5 id="varscope"&gt;var scope&lt;/h5&gt;
 
-&lt;h3 id="var"&gt;var 作用域&lt;/h3&gt;
-
-&lt;p&gt;先来看个简单的例子：&lt;/p&gt;
+&lt;p&gt;Example,&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="language-js"&gt;var parent = function () {  
   var name = "parent_name";
@@ -315,23 +309,17 @@ ng-checked     [checked]
 
   child();
 
-  // will&lt;/code&gt;&lt;/pre&gt;</description><link>http://localhost:2368/zuo-yong-yu-yu-bi-bao-thisvarfunction-{}/</link><guid isPermaLink="false">41a99761-0779-4b1b-99f3-e117c623ef7a</guid><category>JavaScript</category><dc:creator>mxia</dc:creator><pubDate>Wed, 29 Jul 2015 16:50:03 GMT</pubDate><content:encoded>&lt;h2 id=""&gt;目标&lt;/h2&gt;
-
-&lt;p&gt;无具体目标&lt;/p&gt;
-
-&lt;h2 id=""&gt;知识点&lt;/h2&gt;
+  // will throw&lt;/code&gt;&lt;/pre&gt;</description><link>http://localhost:2368/javascript-closure/</link><guid isPermaLink="false">41a99761-0779-4b1b-99f3-e117c623ef7a</guid><category>JavaScript</category><dc:creator>mxia</dc:creator><pubDate>Wed, 29 Jul 2015 16:50:00 GMT</pubDate><content:encoded>&lt;h4 id="notes"&gt;Notes&lt;/h4&gt;
 
 &lt;ol&gt;
-&lt;li&gt;理解 js 中 var 的作用域  &lt;/li&gt;
-&lt;li&gt;了解闭包的概念  &lt;/li&gt;
-&lt;li&gt;理解 this 的指向&lt;/li&gt;
+&lt;li&gt;JS var scope  &lt;/li&gt;
+&lt;li&gt;Learn JS closure  &lt;/li&gt;
+&lt;li&gt;Understand how to use this&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=""&gt;课程内容&lt;/h2&gt;
+&lt;h5 id="varscope"&gt;var scope&lt;/h5&gt;
 
-&lt;h3 id="var"&gt;var 作用域&lt;/h3&gt;
-
-&lt;p&gt;先来看个简单的例子：&lt;/p&gt;
+&lt;p&gt;Example,&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="language-js"&gt;var parent = function () {  
   var name = "parent_name";
@@ -532,8 +520,6 @@ foo.call(myObject); // { value: 100 }
 var newFoo = foo.bind(myObject);  
 newFoo(); // { value: 100 }  
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;完。&lt;/p&gt;
 
 &lt;p&gt;转自 &lt;a href="https://github.com/alsotang/node-lessons/blob/master/lesson11"&gt;https://github.com/alsotang/node-lessons/blob/master/lesson11&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Permutation Sequence</title><description>&lt;p&gt;这道题目算法上没有什么特别的，更像是一道找规律的数学题目。我们知道，n个数的permutation总共有n阶乘个，基于这个性质我们可以得到某一位对应的数字是哪一个。思路是这样的，比如当前长度是n，我们知道每个相同的起始元素对应(n-1)!个permutation，也就是(n-1)!个permutation后会换一个起始元素。因此，只要当前的k进行(n-1)!取余，得到的数字就是当前剩余数组的index，如此就可以得到对应的元素。如此递推直到数组中没有元素结束。实现中我们要维护一个数组来记录当前的元素，每次得到一个元素加入结果数组，然后从剩余数组中移除，因此空间复杂度是O(n)。时间上总共需要n个回合，而每次删除元素如果是用数组需要O(n),所以总共是O(n^2)。这里如果不移除元素也需要对元素做标记，所以要判断第一个还是个线性的操作。&lt;/p&gt;
 
