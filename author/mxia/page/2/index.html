@@ -18,6 +18,7 @@
     <link rel="canonical" href="index.html">
     <meta name="referrer" content="origin-when-cross-origin">
     <link rel="prev" href="../../index.html">
+    <link rel="next" href="../3/index.html">
     <meta name="generator" content="Ghost 0.9">
     <link rel="alternate" type="application/rss+xml" title="Tech and Life" href="../../../../rss/index.html">
     <script>
@@ -65,7 +66,7 @@
         <div class="author-meta">
             
             
-            <span class="author-stats"><i class="icon-stats"></i> 10 posts</span>
+            <span class="author-stats"><i class="icon-stats"></i> 11 posts</span>
         </div>
     </section>
 
@@ -74,11 +75,26 @@
     <div class="extra-pagination inner">
     <nav class="pagination" role="navigation">
         <a class="newer-posts" href="../../"><span aria-hidden="true">←</span> Newer Posts</a>
-    <span class="page-number">Page 2 of 2</span>
+    <span class="page-number">Page 2 of 3</span>
+        <a class="older-posts" href="../3/">Older Posts <span aria-hidden="true">→</span></a>
 </nav>
 
 </div>
 
+<article class="post tag-algorithm">
+    <header class="post-header">
+        <h2 class="post-title"><a href="../../../../permutation-sequence/">Permutation Sequence</a></h2>
+    </header>
+    <section class="post-excerpt">
+        <p>这道题目算法上没有什么特别的，更像是一道找规律的数学题目。我们知道，n个数的permutation总共有n阶乘个，基于这个性质我们可以得到某一位对应的数字是哪一个。思路是这样的，比如当前长度是n，我们知道每个相同的起始元素对应(n-1)!个permutation，也就是(n-1)!个permutation后会换一个起始元素。因此，只要当前的k进行(n-1)!取余，得到的数字就是当前剩余数组的index，如此就可以得到对应的元素。如此递推直到数组中没有元素结束。实现中我们要维护一个数组来记录当前的元素，每次得到一个元素加入结果数组，然后从剩余数组中移除，因此空间复杂度是O(n)。时间上总共需要n个回合， <a class="read-more" href="../../../../permutation-sequence/">»</a></p>
+    </section>
+    <footer class="post-meta">
+        
+        <a href="../../">mxia</a>
+         on <a href="../../../../tag/algorithm/">Algorithm</a>
+        <time class="post-date" datetime="2015-07-20">20 July 2015</time>
+    </footer>
+</article>
 <article class="post">
     <header class="post-header">
         <h2 class="post-title"><a href="../../../../two-way-to-implement-hashtable-chaining-and-open-address/">Two way to implement Hashtable - Chaining and Open Address</a></h2>
@@ -135,24 +151,11 @@
         <time class="post-date" datetime="2015-05-18">18 May 2015</time>
     </footer>
 </article>
-<article class="post tag-family">
-    <header class="post-header">
-        <h2 class="post-title"><a href="../../../../new-start-in-2015/">New Start In 2015</a></h2>
-    </header>
-    <section class="post-excerpt">
-        <p>All my happy starts with my beautiful wife and cute son! <a class="read-more" href="../../../../new-start-in-2015/">»</a></p>
-    </section>
-    <footer class="post-meta">
-        
-        <a href="../../">mxia</a>
-         on <a href="../../../../tag/family/">family</a>
-        <time class="post-date" datetime="2015-05-14">14 May 2015</time>
-    </footer>
-</article>
 
 <nav class="pagination" role="navigation">
         <a class="newer-posts" href="../../"><span aria-hidden="true">←</span> Newer Posts</a>
-    <span class="page-number">Page 2 of 2</span>
+    <span class="page-number">Page 2 of 3</span>
+        <a class="older-posts" href="../3/">Older Posts <span aria-hidden="true">→</span></a>
 </nav>
 
 

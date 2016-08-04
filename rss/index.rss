@@ -1,4 +1,57 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Tech and Life</title><description>Thoughts, stories and ideas.</description><link>http://localhost:2368/</link><generator>Ghost 0.9</generator><lastBuildDate>Thu, 04 Aug 2016 18:24:00 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Node JS with express-jwt example</title><description>&lt;h3 id="jwtpackage"&gt;JWT package&lt;/h3&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Tech and Life</title><description>Thoughts, stories and ideas.</description><link>http://localhost:2368/</link><generator>Ghost 0.9</generator><lastBuildDate>Thu, 04 Aug 2016 20:23:04 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Add Two Numbers With Bit Operation</title><description>&lt;h6 id="question"&gt;Question：&lt;/h6&gt;
+
+&lt;p&gt;Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -. &lt;/p&gt;
+
+&lt;h6 id="example"&gt;Example:&lt;/h6&gt;
+
+&lt;p&gt;Given a = 1 and b = 2, return 3.&lt;/p&gt;
+
+&lt;h6 id="binaryoperation"&gt;Binary Operation&lt;/h6&gt;
+
+&lt;ul&gt;
+&lt;li&gt;XOR (^) to add two binary bits &lt;/li&gt;
+&lt;li&gt;AND (&amp;amp;) to get carrier of two binary bits add operation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id="steps"&gt;Steps,&lt;/h6&gt;</description><link>http://localhost:2368/add-two-numbers-with-bit-operation/</link><guid isPermaLink="false">c12c6e61-4c19-471c-9791-920d27180e10</guid><category>JAVA</category><category>Algorithm</category><dc:creator>mxia</dc:creator><pubDate>Thu, 04 Aug 2016 20:21:12 GMT</pubDate><content:encoded>&lt;h6 id="question"&gt;Question：&lt;/h6&gt;
+
+&lt;p&gt;Calculate the sum of two integers a and b, but you are not allowed to use the operator + and -. &lt;/p&gt;
+
+&lt;h6 id="example"&gt;Example:&lt;/h6&gt;
+
+&lt;p&gt;Given a = 1 and b = 2, return 3.&lt;/p&gt;
+
+&lt;h6 id="binaryoperation"&gt;Binary Operation&lt;/h6&gt;
+
+&lt;ul&gt;
+&lt;li&gt;XOR (^) to add two binary bits &lt;/li&gt;
+&lt;li&gt;AND (&amp;amp;) to get carrier of two binary bits add operation&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id="steps"&gt;Steps,&lt;/h6&gt;
+
+&lt;p&gt;1, Get the carrier (c) by (&amp;amp;) operation of two numbers (a, b) &lt;br&gt;
+2, Add (^) two number without counting carrier to a &lt;br&gt;
+3, left shift carrier one bit to b &lt;br&gt;
+4, if carrier is not 0 add it to a with repeat steps above&lt;/p&gt;
+
+&lt;h6 id="solution"&gt;Solution,&lt;/h6&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;public class _371SumTwoIntegers {  
+    public static void main(String[] args) {
+        System.out.println(getSum(3, 5));
+    }
+
+    public static int getSum(int a, int b) {
+        while (b != 0) {
+            int c = a &amp;amp; b; // carry
+            a ^= b; // add
+            b = c &amp;lt;&amp;lt; 1;
+        }
+        return a;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Node JS with express-jwt example</title><description>&lt;h3 id="jwtpackage"&gt;JWT package&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;express-jwt&lt;/li&gt;
