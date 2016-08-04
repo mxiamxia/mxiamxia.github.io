@@ -11,18 +11,18 @@
 
     <link rel="shortcut icon" href="../favicon.ico">
 
-    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=9a6ae4cf51">
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=a082ab8211">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
-    <link rel="stylesheet" type="text/css" href="../assets/css/prism.css?v=9a6ae4cf51"> 
+    <link rel="stylesheet" type="text/css" href="../assets/css/prism.css?v=a082ab8211"> 
 
-    <link rel="canonical" href="index.html">
+    <link rel="canonical" href="http://mxia.us/permutation-sequence/">
     <meta name="referrer" content="origin-when-cross-origin">
     
     <meta property="og:site_name" content="Tech and Life">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Permutation Sequence">
     <meta property="og:description" content="这道题目算法上没有什么特别的，更像是一道找规律的数学题目。我们知道，n个数的permutation总共有n阶乘个，基于这个性质我们可以得到某一位对应的数字是哪一个。思路是这样的，比如当前长度是n，我们知道每个相同的起始元素对应(n-1)!个permutation，也就是(n-1)!个permutation后会换一个起始元素。因此，只要当前的k进行(n-1)!取余，得到的数字就是当前剩余数组的index，如此就可以得到对应的元素。如此递推直到数组中没有元素结束。实现中我们要维护一个数组来记录当前的元素，每次得到一个元素加入结果数组，然后从剩余数组中移除，因此空间复杂度是O(n)。时间上总共需要n个回合，而每次删除元素如果是用数组需要O(n),所以总共是O(n^2)。这里如果不移除元素也需要对元素做标记，所以要判断第一个还是个线性的操作。     public class Solution {         public String getPermutation(int n, int k) {             if(k == 0) {                 return null;             }             List numList">
-    <meta property="og:url" content="http://localhost:2368/permutation-sequence/">
+    <meta property="og:url" content="http://mxia.us/permutation-sequence/">
     <meta property="article:published_time" content="2015-07-20T16:51:24.000Z">
     <meta property="article:modified_time" content="2015-07-29T17:18:18.000Z">
     <meta property="article:tag" content="Algorithm">
@@ -30,7 +30,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Permutation Sequence">
     <meta name="twitter:description" content="这道题目算法上没有什么特别的，更像是一道找规律的数学题目。我们知道，n个数的permutation总共有n阶乘个，基于这个性质我们可以得到某一位对应的数字是哪一个。思路是这样的，比如当前长度是n，我们知道每个相同的起始元素对应(n-1)!个permutation，也就是(n-1)!个permutation后会换一个起始元素。因此，只要当前的k进行(n-1)!取余，得到的数字就是当前剩余数组的index，如此就可以得到对应的元素。如此递推直到数组中没有元素结束。实现中我们要维护一个数组来记录当前的元素，每次得到一个元素加入结果数组，然后从剩余数组中移除，因此空间复杂度是O(n)。时间上总共需要n个回合，而每次删除元素如果是用数组需要O(n),所以总共是O(n^2)。这里如果不移除元素也需要对元素做标记，所以要判断第一个还是个线性的操作。     public class Solution {         public String getPermutation(int n, int k) {             if(k == 0) {                 return null;             }             List numList">
-    <meta name="twitter:url" content="http://localhost:2368/permutation-sequence/">
+    <meta name="twitter:url" content="http://mxia.us/permutation-sequence/">
     <meta name="twitter:label1" content="Written by">
     <meta name="twitter:data1" content="mxia">
     <meta name="twitter:label2" content="Filed under">
@@ -43,16 +43,16 @@
     "publisher": {
         "@type": "Organization",
         "name": "Tech and Life",
-        "logo": "http://localhost:2368/ghost/img/ghosticon.jpg"
+        "logo": "http://mxia.us/ghost/img/ghosticon.jpg"
     },
     "author": {
         "@type": "Person",
         "name": "mxia",
-        "url": "http://localhost:2368/author/mxia/",
+        "url": "http://mxia.us/author/mxia/",
         "sameAs": []
     },
     "headline": "Permutation Sequence",
-    "url": "http://localhost:2368/permutation-sequence/",
+    "url": "http://mxia.us/permutation-sequence/",
     "datePublished": "2015-07-20T16:51:24.000Z",
     "dateModified": "2015-07-29T17:18:18.000Z",
     "keywords": "Algorithm",
@@ -61,7 +61,7 @@
     </script>
 
     <meta name="generator" content="Ghost 0.9">
-    <link rel="alternate" type="application/rss+xml" title="Tech and Life" href="../rss/index.html">
+    <link rel="alternate" type="application/rss+xml" title="Tech and Life" href="http://mxia.us/rss/">
     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -84,9 +84,9 @@
         <span class="hidden">Close</span>
     </a>
     <ul>
-            <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+            <li class="nav-home" role="presentation"><a href="http://mxia.us/">Home</a></li>
     </ul>
-    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+    <a class="subscribe-button icon-feed" href="http://mxia.us/rss/">Subscribe</a>
 </div>
 <span class="nav-cover"></span>
 
@@ -175,13 +175,13 @@
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="https://twitter.com/share?text=Permutation%20Sequence&amp;url=http://localhost:2368/permutation-sequence/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <a class="icon-twitter" href="https://twitter.com/share?text=Permutation%20Sequence&amp;url=http://mxia.us/permutation-sequence/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/permutation-sequence/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://mxia.us/permutation-sequence/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/permutation-sequence/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://mxia.us/permutation-sequence/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
             </section>
@@ -209,7 +209,7 @@
 
 
         <footer class="site-footer clearfix">
-            <section class="copyright"><a href="../">Tech and Life</a> © 2016</section>
+            <section class="copyright"><a href="http://mxia.us">Tech and Life</a> © 2016</section>
             <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
         </footer>
 
@@ -218,7 +218,7 @@
     <!-- You can safely delete this line if your theme does not require jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
-    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=9a6ae4cf51"></script>
-    <script type="text/javascript" src="../assets/js/index.js?v=9a6ae4cf51"></script>
-    <script type="text/javascript" src="../assets/js/prism.js?v=9a6ae4cf51"></script>
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=a082ab8211"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=a082ab8211"></script>
+    <script type="text/javascript" src="../assets/js/prism.js?v=a082ab8211"></script>
 </body>
