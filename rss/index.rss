@@ -1,0 +1,1010 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Tech and Life</title><description>Thoughts, stories and ideas.</description><link>http://localhost:2368/</link><generator>Ghost 0.9</generator><lastBuildDate>Thu, 04 Aug 2016 18:08:11 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Node JS with express-jwt example</title><description>&lt;h3 id="jwtpackage"&gt;JWT package&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;express-jwt&lt;/li&gt;
+&lt;li&gt;jsonwebtoken&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id="step1"&gt;Step 1,&lt;/h6&gt;
+
+&lt;p&gt;Client side sends the login request to server with ID and password.&lt;/p&gt;
+
+&lt;h6 id="step2"&gt;Step 2,&lt;/h6&gt;
+
+&lt;p&gt;If server side verified ID and password successfully, it will return the signed jwt token to client, and also store the jwt token to Redis or DB for further verification.&lt;/p&gt;</description><link>http://localhost:2368/node-js-jwt-web-app/</link><guid isPermaLink="false">927d5629-1ecf-4f88-a31a-55ae31dd2dc7</guid><category>Node JS</category><category>jwt</category><dc:creator>mxia</dc:creator><pubDate>Fri, 20 May 2016 19:41:08 GMT</pubDate><content:encoded>&lt;h3 id="jwtpackage"&gt;JWT package&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;express-jwt&lt;/li&gt;
+&lt;li&gt;jsonwebtoken&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h6 id="step1"&gt;Step 1,&lt;/h6&gt;
+
+&lt;p&gt;Client side sends the login request to server with ID and password.&lt;/p&gt;
+
+&lt;h6 id="step2"&gt;Step 2,&lt;/h6&gt;
+
+&lt;p&gt;If server side verified ID and password successfully, it will return the signed jwt token to client, and also store the jwt token to Redis or DB for further verification.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var jwt = require('jsonwebtoken');  
+var secretToken = 'aMdoeb5ed87zorRdkD6greDML81DcnrzeSD648ferFejmplx';  
+var token = jwt.sign({id: user._id}, secretToken, { expiresInMinutes: tokenManager.TOKEN_EXPIRATION });  
+return res.json({token:token});  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id="step3"&gt;Step 3,&lt;/h6&gt;
+
+&lt;p&gt;When Client Side gets the login response with token, it should store the jwt token to client side(localStorage) and send the token for every future request, Suggest to use client side interceptor to do the job. &lt;br&gt;
+AngularJS Example,  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;appServices.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService) {  
+    return {
+        request: function (config) {
+            config.headers = config.headers || {};
+            if ($window.sessionStorage.token) {
+                config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+            }
+            return config;
+        }
+}
+
+app.config(function ($httpProvider) {  
+    $httpProvider.interceptors.push('TokenInterceptor');
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id="step4"&gt;Step 4,&lt;/h6&gt;
+
+&lt;p&gt;For every request which needs be authorized, we add jwt (express-jwt) middleware for the request, jwt middleware will put decoded token in req.user for each request if the token is verified(can be decoded by secret), then we can verify the value in the req.user to see if it matches the token we generated/stored in step 1.  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var jwt = require('express-jwt');  
+app.get('/post/create', jwt({secret:secretToken}), routes.users.care);  
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Debug Node JS by node-inspector</title><description>&lt;p&gt;First, you have to install node-inspector package from NPM  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install -g node-inspector  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run node inspector before starting your node application, Node-inspector monitor your node application between Browser and your application thru Websocket. You have to specify a web port number for it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2016/03/1.png" alt="run node-inspector"&gt;&lt;/p&gt;
+
+&lt;p&gt;Add --debug when you start your node&lt;/p&gt;</description><link>http://localhost:2368/debug-node-js-by-node-inspector/</link><guid isPermaLink="false">267c03c5-cd9d-41ab-9d4f-cff9e91b4040</guid><category>Node JS</category><dc:creator>mxia</dc:creator><pubDate>Fri, 25 Mar 2016 18:23:20 GMT</pubDate><content:encoded>&lt;p&gt;First, you have to install node-inspector package from NPM  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;npm install -g node-inspector  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run node inspector before starting your node application, Node-inspector monitor your node application between Browser and your application thru Websocket. You have to specify a web port number for it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2016/03/1.png" alt="run node-inspector"&gt;&lt;/p&gt;
+
+&lt;p&gt;Add --debug when you start your node application  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;node --debug app.js  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2016/03/2-2.png" alt="debug node app"&gt;&lt;/p&gt;
+
+&lt;p&gt;Once your Node APP is running, put the following URL into your browser. Enjoy your fights with bugs  &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://127.0.0.1:8888/debug?port=5858  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2016/03/3.png" alt="debug node app"&gt;&lt;/p&gt;</content:encoded></item><item><title>Angular 2 and Angular 1.x major difference</title><description>&lt;h6 id="introduce"&gt;Introduce&lt;/h6&gt;
+
+&lt;p&gt;Angular团队面临着这样的问题：如何在不影响1.x版本使用的情况下谈论很多2.0的高级新功能。这就是奥斯本效应，上个世纪80年代的电脑公司，终因市场源于而歇业后命名。简而言之，2.0版本听起来越好，就越少有人去使用1.x版本。不同的是，Angular 2.0版本已经可以从github上通过npm install angular@2.0.0-alpha.6 得到它了。但是，这个不能用于生产，它还在被大量的修改。&lt;/p&gt;
+
+&lt;h6 id="angular1xvs20"&gt;Angular 1.x vs. 2.0&lt;/h6&gt;
+
+&lt;p&gt;为什么Angular团队会做出如此大得变化的原因是什么呢。Angular不只是试图跟上，他们还推动了大量的标准的应用，增强了现有的应用架构。&lt;/p&gt;
+
+&lt;h6 id=""&gt;双向数据绑定&lt;/h6&gt;
+
+&lt;p&gt;2.0 单向数据绑定&lt;/p&gt;
+
+&lt;p&gt;在大型项目中，双向数据绑定会被使用的像意大利面条一样。Angular 2.0引入了无回路有向图的单向结构概念。&lt;/p&gt;
+
+&lt;p&gt;这听起来很像React的Flux所做的工作。这种结构也可以被Angular来使用。&lt;/p&gt;
+
+&lt;p&gt;虽然双向绑定会消失，Angular创始人Misko已经声明：&lt;/p&gt;</description><link>http://localhost:2368/angular-2/</link><guid isPermaLink="false">916dcb4d-2f8b-4b09-95c4-dc8f208be188</guid><category>JavaScript</category><category>Angular JS</category><dc:creator>mxia</dc:creator><pubDate>Sun, 13 Mar 2016 03:46:51 GMT</pubDate><content:encoded>&lt;h6 id="introduce"&gt;Introduce&lt;/h6&gt;
+
+&lt;p&gt;Angular团队面临着这样的问题：如何在不影响1.x版本使用的情况下谈论很多2.0的高级新功能。这就是奥斯本效应，上个世纪80年代的电脑公司，终因市场源于而歇业后命名。简而言之，2.0版本听起来越好，就越少有人去使用1.x版本。不同的是，Angular 2.0版本已经可以从github上通过npm install angular@2.0.0-alpha.6 得到它了。但是，这个不能用于生产，它还在被大量的修改。&lt;/p&gt;
+
+&lt;h6 id="angular1xvs20"&gt;Angular 1.x vs. 2.0&lt;/h6&gt;
+
+&lt;p&gt;为什么Angular团队会做出如此大得变化的原因是什么呢。Angular不只是试图跟上，他们还推动了大量的标准的应用，增强了现有的应用架构。&lt;/p&gt;
+
+&lt;h6 id=""&gt;双向数据绑定&lt;/h6&gt;
+
+&lt;p&gt;2.0 单向数据绑定&lt;/p&gt;
+
+&lt;p&gt;在大型项目中，双向数据绑定会被使用的像意大利面条一样。Angular 2.0引入了无回路有向图的单向结构概念。&lt;/p&gt;
+
+&lt;p&gt;这听起来很像React的Flux所做的工作。这种结构也可以被Angular来使用。&lt;/p&gt;
+
+&lt;p&gt;虽然双向绑定会消失，Angular创始人Misko已经声明：2.0中会有方法实现双向绑定，虽然实现的背后数据是单向的。&lt;/p&gt;
+
+&lt;h6 id=""&gt;观察器&lt;/h6&gt;
+
+&lt;p&gt;2.0：Zone.js&lt;/p&gt;
+
+&lt;p&gt;$scope.$watch, $scope.$apply, $timeout这些都不在需要了，这也是1.x版本有如此之大的学习曲线的原因。&lt;/p&gt;
+
+&lt;p&gt;Zone.js可以帮Angular实现变化的自动检测。这听起来很像React的差异比较算法。&lt;/p&gt;
+
+&lt;p&gt;Angular团队解释道，现在的变化检测更快了，内存更小了，同时也更加强大了。变化检测的性能可能随着将来的object.observe的到来而有更大的提升。&lt;/p&gt;
+
+&lt;p&gt;Zone.js同时支持不变对象，这样检测的速度上会有更大的提升。这是因为编译器会认为数据对象不会变化从而进行优化。&lt;/p&gt;
+
+&lt;h6 id=""&gt;组件通信&lt;/h6&gt;
+
+&lt;p&gt;2.0：除了$broadcast 和 $emit，2.0还有一些小得变化，1）你可以在DOM层发送消息，而不是在scope；2）你可以组件嵌套，然后link他们，这看上去很像每个组件都使用它们独立的scope。&lt;/p&gt;
+
+&lt;h6 id="dom"&gt;DOM&lt;/h6&gt;
+
+&lt;p&gt;2.0：从很多方面可以看出，Angular 2.0对于DOM样式的操作很像React的virtual DOM，它引用的是最近呈现的view层。关于Angular Native，Misko提到，这个view层可以运行于web worker，甚至是native。&lt;/p&gt;
+
+&lt;h6 id="scope"&gt;scope&lt;/h6&gt;
+
+&lt;p&gt;数据将会被组织成树形结构&lt;/p&gt;
+
+&lt;p&gt;Angular 2.0也会使用web组件标准。比如，shadow DOM可以用来创建独立的scope。Angular团队解释到，2.0会有一个shadow DOM模拟模块（当前浏览器还不支持web组件），这将给独立css提供新的选择，很酷不是么！&lt;/p&gt;
+
+&lt;h6 id=""&gt;模块&lt;/h6&gt;
+
+&lt;p&gt;2.0：2.0将肯定使用ES6的模块语法。同时，2.0还希望通过懒加载来引入依赖注入。和以往通过单例方式管理不同的是，2.0希望使用一种层次化数据结构来提供继承特性。你将能够控制模块的生命周期，比如services。&lt;/p&gt;
+
+&lt;h6 id=""&gt;指令&lt;/h6&gt;
+
+&lt;p&gt;2.0：现在将被成为“组件”。在1.x版本中，指令在大型项目解决冲突中随处可见。但是在2.0中，你必须导入你的组件才能去解决初始化中得命名空间冲突问题。虽然我不明白它是如何工作的，但是2.0将会创建一个原型模板用于潜在的绑定以优化编译器速度。&lt;/p&gt;
+
+&lt;h6 id="router"&gt;Router&lt;/h6&gt;
+
+&lt;p&gt;2.0:虽然没有1.x里面不稳定的懒加载特性，但看上去应该是从1.x版本移植过来的。&lt;/p&gt;
+
+&lt;p&gt;Brian Ford发了一篇关于新路由的介绍，值得我们关注下。他描述了一个新的路由如何能够同时工作于1.x和2.x版本，这就允许团队逐渐的过度到新的版本中。他同时建议使用当前流行的ui-router来迁移地址。Ui-router很不错，但是缺少一些重要的特性。比如，解析只能在页面加载之后才能传递参数。但是如果你想在到下个页面之前去校验form表单中当前的数据咋办呢？Ui-routers的解析是一次性触发的。相反，新的router会提供一个钩子，允许你在制定地方做一些你想要的动作。&lt;/p&gt;
+
+&lt;h6 id="html"&gt;HTML&lt;/h6&gt;
+
+&lt;p&gt;2.0：虽然语法看上去有些不一样，但是记住，在这背后肯定是有一定好的原因的。&lt;/p&gt;
+
+&lt;h6 id="ng"&gt;ng-指令&lt;/h6&gt;
+
+&lt;p&gt;HTML中得组件被拆分魏两种类型：(事件)和[属性]。他们被包装在圆括号和中括号中，这样肉眼和机器都能识别了，从而可以优化这两种类型。&lt;/p&gt;
+
+&lt;h6 id=""&gt;(事件)&lt;/h6&gt;
+
+&lt;p&gt;(事件) 用于初始化动作.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;1.x             2.0  
+ng-click       (click) (dbl-click)  
+ng-keyup       (keyup)  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id=""&gt;[属性]&lt;/h6&gt;
+
+&lt;p&gt;[属性] 直接链接到DOM属性中.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;1.x               2.0  
+ng-hide        [class:hidden]  
+ng-checked     [checked]  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id="foreach"&gt;!foreach&lt;/h6&gt;
+
+&lt;p&gt;!foreach 是用来取代 ng-repeat.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;&amp;lt;ul&amp;gt;  
+&amp;lt;li !foreach="#item in itemService.items"&amp;gt;&amp;lt;/li&amp;gt;  
+&amp;lt;/ul&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id="item"&gt;#item&lt;/h6&gt;
+
+&lt;p&gt;对象的属性加上 # 就可以直接绑定在html上。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;&amp;lt;input type="text" #userName /&amp;gt;  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id=""&gt;{{ }}&lt;/h6&gt;
+
+&lt;p&gt;双大括号在2.0依然可见。看，不是啥都在变化。&lt;/p&gt;
+
+&lt;h6 id=""&gt;组件名称&lt;/h6&gt;
+
+&lt;p&gt;不会再出现骆驼命名和蛇命名混淆的情况了。现在你必须自己制定组件中得指令名称。由于Angular 2.0符合web组件标准，它需要-来链接名字。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;@Component {
+    selector: 'myApp-component'
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h6 id=""&gt;总结&lt;/h6&gt;
+
+&lt;p&gt;Angular 2.0版本看起来有点不可思议的。虽然还没有完全可用于生产，但是你可以玩一玩了。可以在github上下载到。同时也有一些例子，比如ng2do。&lt;/p&gt;
+
+&lt;p&gt;如果你像降低学习曲线，那你现在可以做如下事情：&lt;/p&gt;
+
+&lt;p&gt;尝试看Rob Eisenbergs的新框架：Aurelia。毫无疑问，非常值得看，从中可以学到很多关于web组件和shadow DOM的事情。&lt;/p&gt;
+
+&lt;p&gt;在Angular1.x中使用ES6-(现在可能是ES2015)。这里有很多例子关于ES6和JSPM。&lt;/p&gt;
+
+&lt;p&gt;多多学习Facebook的React.js。很多伟大的理念都是从这里传播出去的，比如Flux。&lt;/p&gt;
+
+&lt;p&gt;放眼一看，Angular1和2两个版本的共同点很少。2.0版本看起来是要做彻底的改变。因此有必要抽点时间去研究下心的框架，从而可以快速的成为专家。&lt;/p&gt;</content:encoded></item><item><title>JavaScript Scope and Closure</title><description>&lt;h2 id=""&gt;目标&lt;/h2&gt;
+
+&lt;p&gt;无具体目标&lt;/p&gt;
+
+&lt;h2 id=""&gt;知识点&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;理解 js 中 var 的作用域  &lt;/li&gt;
+&lt;li&gt;了解闭包的概念  &lt;/li&gt;
+&lt;li&gt;理解 this 的指向&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=""&gt;课程内容&lt;/h2&gt;
+
+&lt;h3 id="var"&gt;var 作用域&lt;/h3&gt;
+
+&lt;p&gt;先来看个简单的例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var parent = function () {  
+  var name = "parent_name";
+  var age = 13;
+
+  var child = function () {
+    var name = "child_name";
+    var childAge = 0.3;
+
+    // =&amp;gt; child_name 13 0.3
+    console.log(name, age, childAge);
+  };
+
+  child();
+
+  // will&lt;/code&gt;&lt;/pre&gt;</description><link>http://localhost:2368/zuo-yong-yu-yu-bi-bao-thisvarfunction-{}/</link><guid isPermaLink="false">41a99761-0779-4b1b-99f3-e117c623ef7a</guid><category>JavaScript</category><dc:creator>mxia</dc:creator><pubDate>Wed, 29 Jul 2015 16:50:03 GMT</pubDate><content:encoded>&lt;h2 id=""&gt;目标&lt;/h2&gt;
+
+&lt;p&gt;无具体目标&lt;/p&gt;
+
+&lt;h2 id=""&gt;知识点&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;理解 js 中 var 的作用域  &lt;/li&gt;
+&lt;li&gt;了解闭包的概念  &lt;/li&gt;
+&lt;li&gt;理解 this 的指向&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=""&gt;课程内容&lt;/h2&gt;
+
+&lt;h3 id="var"&gt;var 作用域&lt;/h3&gt;
+
+&lt;p&gt;先来看个简单的例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var parent = function () {  
+  var name = "parent_name";
+  var age = 13;
+
+  var child = function () {
+    var name = "child_name";
+    var childAge = 0.3;
+
+    // =&amp;gt; child_name 13 0.3
+    console.log(name, age, childAge);
+  };
+
+  child();
+
+  // will throw Error
+  // ReferenceError: childAge is not defined
+  console.log(name, age, childAge);
+};
+
+parent();  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;直觉地，内部函数可以访问外部函数的变量，外部不能访问内部函数的变量。上面的例子中内部函数 child 可以访问变量 age，而外部函数 parent 不可以访问 child 中的变量 childAge，因此会抛出没有定义变量的异常。&lt;/p&gt;
+
+&lt;p&gt;有个重要的事，如果忘记var，那么变量就被声明为全局变量了。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;function foo() {  
+  value = "hello";
+}
+foo();  
+console.log(value); // 输出hello  
+console.log(global.value) // 输出hello  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个例子可以很正常的输出 &lt;code&gt;hello&lt;/code&gt;，是因为 &lt;code&gt;value&lt;/code&gt; 变量在定义时，没有使用 &lt;code&gt;var&lt;/code&gt; 关键词，所以被定义成了全局变量。在 Node 中，全局变量会被定义在 &lt;code&gt;global&lt;/code&gt; 对象下；在浏览器中，全局变量会被定义在 &lt;code&gt;window&lt;/code&gt; 对象下。&lt;/p&gt;
+
+&lt;p&gt;如果你确实要定义一个全局变量的话，请显示地定义在 &lt;code&gt;global&lt;/code&gt; 或者 &lt;code&gt;window&lt;/code&gt; 对象上。&lt;/p&gt;
+
+&lt;p&gt;这类不小心定义全局变量的问题可以被 jshint 检测出来，如果你使用 sublime 编辑器的话，记得装一个 &lt;code&gt;SublimeLinter&lt;/code&gt; 插件，这是插件支持多语言的语法错误检测，js 的检测是原生支持的。&lt;/p&gt;
+
+&lt;p&gt;JavaScript 中，变量的局部作用域是函数级别的。不同于 C 语言，在 C 语言中，作用域是块级别的。 &lt;br&gt;
+JavaScript 中没有块级作用域。&lt;/p&gt;
+
+&lt;p&gt;js 中，函数中声明的变量在整个函数中都有定义。比如如下代码段，变量 i 和 value 虽然是在 for 循环代码块中被定义，但在代码块外仍可以访问 i 和 value。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;function foo() {  
+  for (var i = 0; i &amp;lt; 10; i++) {
+    var value = "hello world";
+  }
+  console.log(i); //输出10
+  console.log(value);//输出hello world
+}
+foo();  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以有种说法是：应该提前声明函数中需要用到的变量，即，在函数体的顶部声明可能用到的变量，这样就可以避免出现一些奇奇怪怪怪的 bug。&lt;/p&gt;
+
+&lt;p&gt;但我个人不喜欢遵守这一点，一般都是现用现声明的。这类错误的检测交给 jshint 来做就好了。&lt;/p&gt;
+
+&lt;h3 id=""&gt;闭包&lt;/h3&gt;
+
+&lt;p&gt;闭包这个概念，在函数式编程里很常见，简单的说，就是使内部函数可以访问定义在外部函数中的变量。&lt;/p&gt;
+
+&lt;p&gt;假如我们要实现一系列的函数：add10，add20，它们的定义是 &lt;code&gt;int add10(int n)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;为此我们构造了一个名为 adder 的构造器，如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var adder = function (x) {  
+  var base = x;
+  return function (n) {
+    return n + base;
+  };
+};
+
+var add10 = adder(10);  
+console.log(add10(5));
+
+var add20 = adder(20);  
+console.log(add20(5));  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;每次调用 adder 时，adder 都会返回一个函数给我们。我们传给 adder 的值，会保存在一个名为 base 的变量中。由于返回的函数在其中引用了 base 的值，于是 base 的引用计数被 +1。当返回函数不被垃圾回收时，则 base 也会一直存在。&lt;/p&gt;
+
+&lt;p&gt;我暂时想不出什么实用的例子来，如果想深入理解这块，可以看看这篇 &lt;a href="http://coolshell.cn/articles/6731.html"&gt;http://coolshell.cn/articles/6731.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=""&gt;闭包的一个坑&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;for (var i = 0; i &amp;lt; 5; i++) {  
+  setTimeout(function () {
+    console.log(i);
+  }, 5);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这个代码块会打印五个 &lt;code&gt;5&lt;/code&gt; 出来，而我们预想的结果是打印 1 2 3 4 5。&lt;/p&gt;
+
+&lt;p&gt;之所以会这样，是因为 setTimeout 中的 i 是对外层 i 的引用。当 setTimeout 的代码被解释的时候，运行时只是记录了 i 的引用，而不是值。而当 setTimeout 被触发时，五个 setTimeout 中的 i 同时被取值，由于它们都指向了外层的同一个 i，而那个 i 的值在迭代完成时为 5，所以打印了五次 &lt;code&gt;5&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;为了得到我们预想的结果，我们可以把 i 赋值成一个局部的变量，从而摆脱外层迭代的影响。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;for (var i = 0; i &amp;lt; 5; i++) {  
+  (function (idx) {
+    setTimeout(function () {
+      console.log(idx);
+    }, 5);
+  })(i);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="this"&gt;this&lt;/h3&gt;
+
+&lt;p&gt;在函数执行时，this 总是指向调用该函数的对象。要判断 this 的指向，其实就是判断 this 所在的函数属于谁。&lt;/p&gt;
+
+&lt;p&gt;在《javaScript语言精粹》这本书中，把 this 出现的场景分为四类，简单的说就是：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;有对象就指向调用对象&lt;/li&gt;
+&lt;li&gt;没调用对象就指向全局对象&lt;/li&gt;
+&lt;li&gt;用new构造就指向新对象&lt;/li&gt;
+&lt;li&gt;通过 apply 或 call 或 bind 来改变 this 的所指。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;1）函数有所属对象时：指向所属对象&lt;/p&gt;
+
+&lt;p&gt;函数有所属对象时，通常通过 &lt;code&gt;.&lt;/code&gt; 表达式调用，这时 &lt;code&gt;this&lt;/code&gt; 自然指向所属对象。比如下面的例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var myObject = {value: 100};  
+myObject.getValue = function () {  
+  console.log(this.value);  // 输出 100
+
+  // 输出 { value: 100, getValue: [Function] }，
+  // 其实就是 myObject 对象本身
+  console.log(this);
+
+  return this.value;
+};
+
+console.log(myObject.getValue()); // =&amp;gt; 100  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;getValue()&lt;/code&gt; 属于对象 &lt;code&gt;myObject&lt;/code&gt;，并由 &lt;code&gt;myOjbect&lt;/code&gt; 进行 &lt;code&gt;.&lt;/code&gt; 调用，因此 &lt;code&gt;this&lt;/code&gt; 指向对象 &lt;code&gt;myObject&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;2) 函数没有所属对象：指向全局对象&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var myObject = {value: 100};  
+myObject.getValue = function () {  
+  var foo = function () {
+    console.log(this.value) // =&amp;gt; undefined
+    console.log(this);// 输出全局对象 global
+  };
+
+  foo();
+
+  return this.value;
+};
+
+console.log(myObject.getValue()); // =&amp;gt; 100  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在上述代码块中，&lt;code&gt;foo&lt;/code&gt; 函数虽然定义在 &lt;code&gt;getValue&lt;/code&gt; 的函数体内，但实际上它既不属于 &lt;code&gt;getValue&lt;/code&gt; 也不属于 &lt;code&gt;myObject&lt;/code&gt;。&lt;code&gt;foo&lt;/code&gt; 并没有被绑定在任何对象上，所以当调用时，它的 &lt;code&gt;this&lt;/code&gt; 指针指向了全局对象 &lt;code&gt;global&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;据说这是个设计错误。&lt;/p&gt;
+
+&lt;p&gt;3）构造器中的 this：指向新对象&lt;/p&gt;
+
+&lt;p&gt;js 中，我们通过 &lt;code&gt;new&lt;/code&gt; 关键词来调用构造函数，此时 this 会绑定在该新对象上。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var SomeClass = function(){  
+  this.value = 100;
+}
+
+var myCreate = new SomeClass();
+
+console.log(myCreate.value); // 输出100  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;顺便说一句，在 js 中，构造函数、普通函数、对象方法、闭包，这四者没有明确界线。界线都在人的心中。&lt;/p&gt;
+
+&lt;p&gt;4) apply 和 call 调用以及 bind 绑定：指向绑定的对象&lt;/p&gt;
+
+&lt;p&gt;apply() 方法接受两个参数第一个是函数运行的作用域，另外一个是一个参数数组(arguments)。&lt;/p&gt;
+
+&lt;p&gt;call() 方法第一个参数的意义与 apply() 方法相同，只是其他的参数需要一个个列举出来。&lt;/p&gt;
+
+&lt;p&gt;简单来说，call 的方式更接近我们平时调用函数，而 apply 需要我们传递 Array 形式的数组给它。它们是可以互相转换的。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-js"&gt;var myObject = {value: 100};
+
+var foo = function(){  
+  console.log(this);
+};
+
+foo(); // 全局变量 global  
+foo.apply(myObject); // { value: 100 }  
+foo.call(myObject); // { value: 100 }
+
+var newFoo = foo.bind(myObject);  
+newFoo(); // { value: 100 }  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;完。&lt;/p&gt;
+
+&lt;p&gt;转自 &lt;a href="https://github.com/alsotang/node-lessons/blob/master/lesson11"&gt;https://github.com/alsotang/node-lessons/blob/master/lesson11&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Permutation Sequence</title><description>&lt;p&gt;这道题目算法上没有什么特别的，更像是一道找规律的数学题目。我们知道，n个数的permutation总共有n阶乘个，基于这个性质我们可以得到某一位对应的数字是哪一个。思路是这样的，比如当前长度是n，我们知道每个相同的起始元素对应(n-1)!个permutation，也就是(n-1)!个permutation后会换一个起始元素。因此，只要当前的k进行(n-1)!取余，得到的数字就是当前剩余数组的index，如此就可以得到对应的元素。如此递推直到数组中没有元素结束。实现中我们要维护一个数组来记录当前的元素，每次得到一个元素加入结果数组，然后从剩余数组中移除，因此空间复杂度是O(n)。时间上总共需要n个回合，而每次删除元素如果是用数组需要O(n),所以总共是O(n^2)。这里如果不移除元素也需要对元素做标记，所以要判断第一个还是个线性的操作。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;    public class Solution {
+        public String getPermutation(int n, int k) {
+            if(k == 0) {
+                return null;
+            }
+            List numList&lt;/code&gt;&lt;/pre&gt;</description><link>http://localhost:2368/permutation-sequence/</link><guid isPermaLink="false">a678d8af-bf64-45b4-a606-9cdcab387e0d</guid><category>Algorithm</category><dc:creator>mxia</dc:creator><pubDate>Mon, 20 Jul 2015 16:51:24 GMT</pubDate><content:encoded>&lt;p&gt;这道题目算法上没有什么特别的，更像是一道找规律的数学题目。我们知道，n个数的permutation总共有n阶乘个，基于这个性质我们可以得到某一位对应的数字是哪一个。思路是这样的，比如当前长度是n，我们知道每个相同的起始元素对应(n-1)!个permutation，也就是(n-1)!个permutation后会换一个起始元素。因此，只要当前的k进行(n-1)!取余，得到的数字就是当前剩余数组的index，如此就可以得到对应的元素。如此递推直到数组中没有元素结束。实现中我们要维护一个数组来记录当前的元素，每次得到一个元素加入结果数组，然后从剩余数组中移除，因此空间复杂度是O(n)。时间上总共需要n个回合，而每次删除元素如果是用数组需要O(n),所以总共是O(n^2)。这里如果不移除元素也需要对元素做标记，所以要判断第一个还是个线性的操作。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;    public class Solution {
+        public String getPermutation(int n, int k) {
+            if(k == 0) {
+                return null;
+            }
+            List numList = new ArrayList();
+            int f = 1;
+            for(int i=1; i&amp;lt;=n; i++) {
+                numList.add(i);
+                f = f*i;
+            }
+            f = f/n;
+            k--;
+            StringBuffer sb = new StringBuffer();
+            for(int j=0; j&amp;lt;n; j++) {
+                int index = k/f;
+                sb.append(numList.get(index));
+                numList.remove(index);
+                k = k%f;
+                if(j != n-1) {
+                    f = f/(n-j-1);
+                }
+            }
+            return sb.toString();
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Two way to implement Hashtable - Chaining and Open Address</title><description>&lt;h3 id="interface"&gt;Interface&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;    public interface HashTable {
+    //向散列表中插入一个关键字为theKey的元素obj，若成功返回真否则返回假
+    boolean insert(Object theKey, Object obj);
+
+    //向散列表中查找并返回给定关键字theKey对应的元素，若查找失败返回空
+    Object search(Object theKey);
+
+    //从散列表中删除关键字为theKey的元素，若删除成功返回真否则返回假
+    boolean delete(Object theKey);
+
+    //返回散列表中已存在的元素个数
+    int size();
+
+    //返回散列表的容量，即散列表的空间大小m的值
+    int capacity();
+
+    //判断散列表是否为空，若为空则返回真  否则返回假
+    boolean isEmpty();
+
+    //清楚散列表的所有元素，使之变成一个空表
+    void clear();
+
+    //输出散列表中保存的所有关键字和对应的元素
+    void output();
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="separatechaining"&gt;Separate Chaining&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;public class SeqHashTable implements HashTable&lt;/code&gt;&lt;/pre&gt;</description><link>http://localhost:2368/two-way-to-implement-hashtable-chaining-and-open-address/</link><guid isPermaLink="false">ae2a4cef-36c9-45c1-b9ff-ad3ee12f63f0</guid><dc:creator>mxia</dc:creator><pubDate>Mon, 29 Jun 2015 03:51:37 GMT</pubDate><content:encoded>&lt;h3 id="interface"&gt;Interface&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;    public interface HashTable {
+    //向散列表中插入一个关键字为theKey的元素obj，若成功返回真否则返回假
+    boolean insert(Object theKey, Object obj);
+
+    //向散列表中查找并返回给定关键字theKey对应的元素，若查找失败返回空
+    Object search(Object theKey);
+
+    //从散列表中删除关键字为theKey的元素，若删除成功返回真否则返回假
+    boolean delete(Object theKey);
+
+    //返回散列表中已存在的元素个数
+    int size();
+
+    //返回散列表的容量，即散列表的空间大小m的值
+    int capacity();
+
+    //判断散列表是否为空，若为空则返回真  否则返回假
+    boolean isEmpty();
+
+    //清楚散列表的所有元素，使之变成一个空表
+    void clear();
+
+    //输出散列表中保存的所有关键字和对应的元素
+    void output();
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id="separatechaining"&gt;Separate Chaining&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;public class SeqHashTable implements HashTable {  
+        private int m;              //保存散列表的容量
+    private Object[] key;       //定义保存元素关键字的数组
+    private Object[] ht;        //定义保存散列表的数组
+    private int n;              //散列表中已有的元素个数
+    private Object tag;         //元素内容被删除后的关键字删除标记
+
+    //散列函数，采用除
+    private int h(Object theKey){
+        //留余数发，若参数不是整数，应设法转换成整数
+        return (Integer)theKey%m;
+    }
+
+    public SeqHashTable(int mm, Object tag){
+        //假定散列表的容量至少为13
+        if(mm &amp;lt; 13){
+            m = 13;
+        }else{
+            m = mm;
+        }
+        n=0;
+        key = new Object[m];
+        ht = new Object[m];
+        this.tag = tag;         //置关键字删除标记为参加tag的值
+    }
+
+    @Override
+    public boolean insert(Object theKey, Object obj) {
+        int d = h(theKey);
+        int temp = d;
+        while(key[d] != null &amp;amp;&amp;amp; key[d].equals(tag) != true){
+            //用线性探测法处理冲突，寻找插入位置
+            if(key[d].equals(theKey) == true)
+                break;              //元素已经存在，则退出循环
+            d = (d+1) % m;
+            if(d == temp){          //查找一周后扔无位置，应重组散列表或退出运行
+                System.out.println("散列表无空间，退出运行");
+                System.exit(1);
+            }
+        }
+        if(key[d] == null || key[d].equals(tag)==true){
+            //找到插入位置，插入新的关键字和元素并返回真
+            key[d] = theKey;
+            ht[d] = obj;
+            n++;
+            return true;
+        }else{              //用新元素obj修改已存在的元素并返回假
+            ht[d] = obj;
+            return false;
+        }
+    }
+
+    @Override
+    public Object search(Object theKey) {
+        int d= h(theKey);
+        int temp = d;
+        while(key[d] != null){
+            if(key[d].equals(theKey)){
+                return ht[d];
+            }else{
+                d = (d+1) % m;
+            }
+            if(d == temp)
+                return null;
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean delete(Object theKey) {
+        int d = h(theKey);
+        int temp = d;
+        while(key[d] != null){
+            if(key[d].equals(theKey)){
+                key[d] = tag;
+                ht[d] = null;
+                n--;
+                return true;
+            }else{
+                d = (d+1)%m;
+            }
+            if(d==temp){
+                return false;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int size() {
+        return n;
+    }
+
+    @Override
+    public int capacity() {
+        return m;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return n==0;
+    }
+
+    @Override
+    public void clear() {
+        for(int i=0; i&amp;lt;m; i++){
+            key[i] = null;
+            ht[i] = null;
+        }
+        n=0;
+    }
+
+    @Override
+    public void output() {
+        for(int i=0; i&amp;lt;m; i++){
+            if(key[i]==null || key[i].equals(tag))
+                continue;
+            System.out.println("(" + key[i] + " " + ht[i] + "),");
+        }
+        System.out.println();
+    }
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id="openaddressimplementation"&gt;Open Address implementation&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class="language-java"&gt;public class LinkHashTable implements HashTable {  
+    private int m;          //保存散列表的容量
+    private HashNode[] ht;  //定义保存散列表的数组
+    private int n;          //散列表中已有的元素个数
+
+    //散列函数
+    private int h(Object theKey){
+        return (Integer)theKey % m;
+    }
+
+    public LinkHashTable(int mm){
+        if(mm &amp;lt; 13){
+            m = 13;
+        }else{
+            m = mm;
+        }
+        n = 0; 
+        ht = new HashNode[m];
+    }
+
+    @Override
+    public boolean insert(Object theKey, Object obj) {
+        int d = h(theKey);
+        HashNode p = ht[d];
+        // 从单链表中顺序查找关键字为theKey的节点
+        while(p != null){
+            if(p.key.equals(theKey) == true)
+                break;
+            else
+                p = p.next;
+        }
+
+        if(p != null){          //用新元素obj修改已有节点的元素值并返回假
+            p.element = obj;
+            return false;
+        }else{
+            p = new HashNode(theKey, obj);
+            p.next = ht[d];
+            ht[d] = p;
+            n++;
+            return true;
+        }
+    }
+
+    @Override
+    public Object search(Object theKey) {
+        int d = h(theKey);
+        HashNode p = ht[d];
+        while(p!=null){
+            if(p.key.equals(theKey))
+                return p.element;
+            else
+                p = p.next;
+        }
+        return null;
+    }
+
+    @Override
+    public boolean delete(Object theKey) {
+        int d = h(theKey);
+        HashNode p = ht[d], q = null;   //p指向表头节点，q指向前驱节点，初始为空
+        while(p != null){
+            if(p.key.equals(theKey))
+                break;
+            else{
+                q = p; 
+                p = p.next;
+            }
+        }
+        if(p == null)       //没有删除的元素，返回false
+            return false;
+        else if(q == null)  //删除的是表头节点
+            ht[d] = p.next;
+        else                //删除的是非表头节点
+            q.next = p.next;
+        n--;
+
+        return true;
+    }
+
+    @Override
+    public int size() {
+        return n;
+    }
+
+    @Override
+    public int capacity() {
+        return m;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return n==0;
+    }
+
+    @Override
+    public void clear() {
+        for(int i=0; i&amp;lt;m; i++){
+            ht[i] = null;
+        }
+        n=0;
+    }
+
+    @Override
+    public void output() {
+        for(int i=0; i&amp;lt;m; i++){
+            HashNode p = ht[i];
+            while(p != null){
+                System.out.println("(" + p.key + " " + p.element + "),");
+                p = p.next;
+            }
+        }
+        System.out.println();
+    }
+
+class HashNode {  
+    Object key;
+    Object element;
+    HashNode next;
+    public HashNode(Object theKey, Object obj){
+        key = theKey;
+        element = obj;
+        next = null;
+    }
+}
+}
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>xor operation practice</title><description>&lt;p&gt;Code snippet without using xor operation,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if ((dividend &amp;gt; 0 &amp;amp;&amp;amp; divisor &amp;gt; 0) || (dividend &amp;lt; 0 &amp;amp;&amp;amp; divisor &amp;lt; 0))
+    return ret;
+else
+    return -ret;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Equivalent code snippet with xor operation&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;return (dividend&amp;gt;0 ^ divisor&amp;gt;0) ? -ret : ret; 
+&lt;/code&gt;&lt;/pre&gt;</description><link>http://localhost:2368/xor-practice/</link><guid isPermaLink="false">c7f2c183-22ef-46aa-a5bd-b24dd2390bfe</guid><category>JAVA</category><dc:creator>mxia</dc:creator><pubDate>Tue, 02 Jun 2015 03:08:36 GMT</pubDate><content:encoded>&lt;p&gt;Code snippet without using xor operation,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;if ((dividend &amp;gt; 0 &amp;amp;&amp;amp; divisor &amp;gt; 0) || (dividend &amp;lt; 0 &amp;amp;&amp;amp; divisor &amp;lt; 0))
+    return ret;
+else
+    return -ret;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Equivalent code snippet with xor operation&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;return (dividend&amp;gt;0 ^ divisor&amp;gt;0) ? -ret : ret; 
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Be careful on contains() method</title><description>&lt;p&gt;It is very important to understand how to use contains() method in Map/Set, otherwise unexpected result you may get.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;A common mistake &lt;br&gt;
+You will not able to get "green" Apple object in this example since the one you stored at the beginning and the one you queried is two&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><link>http://localhost:2368/be-careful-on-contains-method/</link><guid isPermaLink="false">b4cc32e6-0d59-4d45-8e49-bca1ba57a97f</guid><category>JAVA</category><category>fundation</category><dc:creator>mxia</dc:creator><pubDate>Fri, 29 May 2015 19:03:07 GMT</pubDate><content:encoded>&lt;p&gt;It is very important to understand how to use contains() method in Map/Set, otherwise unexpected result you may get.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;A common mistake &lt;br&gt;
+You will not able to get "green" Apple object in this example since the one you stored at the beginning and the one you queried is two different objects.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import java.util.HashMap;
+public class Apple {
+    private String color;        
+    public Apple(String color) {
+        this.color = color;
+    }        
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Apple))
+            return false;   
+        if (obj == this)
+            return true;
+        return this.color.equals(((Apple) obj).color);
+    }        
+    public static void main(String[] args) {
+        Apple a1 = new Apple("green");
+        Apple a2 = new Apple("red");         
+        //hashMap stores apple type and its quantity
+        HashMap&amp;lt;Apple, Integer&amp;gt; m = new HashMap&amp;lt;Apple, Integer&amp;gt;();
+        m.put(a1, 10);
+        m.put(a2, 20);
+        System.out.println(m.get(new Apple("green")));
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;2, fix the issue &lt;br&gt;
+You have to override hashCode() to object you want to compare, HashCode() will be called inside contains() method from Map/Set to identify if two object are the same or not.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    import java.util.HashMap;
+    public class Apple {
+        private String color;
+
+        public Apple(String color) {
+            this.color = color;
+        }
+        @Override
+        public boolean equals(Object obj) {
+            if (!(obj instanceof Apple))
+                return false;   
+            if (obj == this)
+                return true;
+            return this.color.equals(((Apple) obj).color);
+        }
+        @Override  
+          public int hashCode() {  
+            String s = thiscolor;
+            return s.hashCode();
+        }
+
+        public static void main(String[] args) {
+            Apple a1 = new Apple("green");
+            Apple a2 = new Apple("red");
+
+            //hashMap stores apple type and its quantity
+            HashMap&amp;lt;Apple, Integer&amp;gt; m = new HashMap&amp;lt;Apple, Integer&amp;gt;();
+            m.put(a1, 10);
+            m.put(a2, 20);
+            System.out.println(m.get(new Apple("green")));
+        }
+    }
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Three Sum O(n^2) Solution</title><description>&lt;p&gt;It takes a while to figure out the solution on O(n^2) with no extra spaces. The idea is that loop the array to make each of integer as target, check the other two integers in the rest of array if it is sum to the negatives of the&lt;/p&gt;</description><link>http://localhost:2368/three-sum-solution/</link><guid isPermaLink="false">55bb7b81-d0cf-4d5f-bca5-e7379649465a</guid><category>Algorithm</category><category>JAVA</category><category>3Sum</category><dc:creator>mxia</dc:creator><pubDate>Mon, 18 May 2015 20:02:45 GMT</pubDate><content:encoded>&lt;p&gt;It takes a while to figure out the solution on O(n^2) with no extra spaces. The idea is that loop the array to make each of integer as target, check the other two integers in the rest of array if it is sum to the negatives of the target, add these three integers into result list.&lt;/p&gt;
+
+&lt;p&gt;There is another Hashtable solution for 3Sum which is a transform from 2Sum solution. But it needs extra spaces.&lt;/p&gt;
+
+&lt;p&gt;Pay attention to,&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;check boundary as always&lt;/li&gt;
+&lt;li&gt;Duplicated solution&lt;/li&gt;
+&lt;li&gt;Move pointer smart&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Question, &lt;br&gt;
+Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.&lt;/p&gt;
+
+&lt;p&gt;Solution,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class ThreeSum {
+
+/** 
+ * @author Min
+ * @date May 13, 2015
+ * @return void 
+ * @throws 
+ */
+public static void main(String[] args) {
+    // TODO Auto-generated method stub
+    int[] input = {-2,0,1,1,2};
+    threeSum(input);
+}
+ public static List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; threeSum(int[] nums) {
+        List&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt; result = new  ArrayList&amp;lt;List&amp;lt;Integer&amp;gt;&amp;gt;();
+        if(nums.length&amp;lt;3)
+        {
+            return result;
+        }
+        Arrays.sort(nums);
+        for(int i=0;i&amp;lt;nums.length-2;i++)
+        {
+            //Avoid duplicated calculation if neighbors are the same
+            if(i==0 || nums[i]&amp;gt;nums[i-1])
+            {
+                int neg = -nums[i];
+                int start = i+1;
+                int end = nums.length-1;
+                while(start&amp;lt;end)
+                {
+                    if((nums[start]+nums[end])==neg)
+                    {
+                        List&amp;lt;Integer&amp;gt; each = new ArrayList&amp;lt;Integer&amp;gt;();
+                        each.add(nums[i]);
+                        each.add(nums[start]);
+                        each.add(nums[end]);
+                        start++;
+                        end--;
+                        //avoid duplicate solution
+                        if(!result.contains(each))
+                        {
+                            result.add(each);
+                        }
+                    }
+                    //if 
+                    else if(nums[start]+nums[end]&amp;lt;neg)
+                    {
+                        start++;
+                    }
+                    else
+                    {
+                        end--;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>New Start In 2015</title><description>&lt;p&gt;All my happy starts with my beautiful wife and cute son!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2015/05/photo-11.jpg" alt="Me and Pan"&gt;
+&lt;img src="http://localhost:2368/content/images/2015/05/IMG_5745.JPG" alt="My son Eric"&gt;&lt;/p&gt;</description><link>http://localhost:2368/new-start-in-2015/</link><guid isPermaLink="false">a03f1598-6256-4d7e-96b2-9460c09b4bc7</guid><category>family</category><dc:creator>mxia</dc:creator><pubDate>Thu, 14 May 2015 01:44:12 GMT</pubDate><content:encoded>&lt;p&gt;All my happy starts with my beautiful wife and cute son!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="http://localhost:2368/content/images/2015/05/photo-11.jpg" alt="Me and Pan"&gt;
+&lt;img src="http://localhost:2368/content/images/2015/05/IMG_5745.JPG" alt="My son Eric"&gt;&lt;/p&gt;</content:encoded></item></channel></rss>

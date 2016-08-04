@@ -1,0 +1,274 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Three Sum O(n^2) Solution</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=678f7c93a2">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+    <link rel="stylesheet" type="text/css" href="../assets/css/prism.css?v=678f7c93a2"> 
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="origin-when-cross-origin">
+    
+    <meta property="og:site_name" content="Tech and Life">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Three Sum O(n^2) Solution">
+    <meta property="og:description" content="It takes a while to figure out the solution on O(n^2) with no extra spaces. The idea is that loop the array to make each of integer as target, check the other two integers in the rest of array if it is sum to the negatives of the">
+    <meta property="og:url" content="http://localhost:2368/three-sum-solution/">
+    <meta property="article:published_time" content="2015-05-18T20:02:45.000Z">
+    <meta property="article:modified_time" content="2015-05-19T03:46:19.000Z">
+    <meta property="article:tag" content="Algorithm">
+    <meta property="article:tag" content="JAVA">
+    <meta property="article:tag" content="3Sum">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Three Sum O(n^2) Solution">
+    <meta name="twitter:description" content="It takes a while to figure out the solution on O(n^2) with no extra spaces. The idea is that loop the array to make each of integer as target, check the other two integers in the rest of array if it is sum to the negatives of the">
+    <meta name="twitter:url" content="http://localhost:2368/three-sum-solution/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="mxia">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="Algorithm, JAVA, 3Sum">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tech and Life",
+        "logo": "http://localhost:2368/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "mxia",
+        "url": "http://localhost:2368/author/mxia/",
+        "sameAs": []
+    },
+    "headline": "Three Sum O(n^2) Solution",
+    "url": "http://localhost:2368/three-sum-solution/",
+    "datePublished": "2015-05-18T20:02:45.000Z",
+    "dateModified": "2015-05-19T03:46:19.000Z",
+    "keywords": "Algorithm, JAVA, 3Sum",
+    "description": "It takes a while to figure out the solution on O(n^2) with no extra spaces. The idea is that loop the array to make each of integer as target, check the other two integers in the rest of array if it is sum to the negatives of the"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.9">
+    <link rel="alternate" type="application/rss+xml" title="Tech and Life" href="../rss/index.html">
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62982905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55770ac61cd13df8" async="async"></script>
+</head>
+<body class="post-template tag-algorithm tag-java tag-3sum nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-algorithm tag-java tag-3sum">
+
+        <header class="post-header">
+            <h1 class="post-title">Three Sum O(n^2) Solution</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-05-18">18 May 2015</time>  on <a href="../tag/algorithm/">Algorithm</a>, <a href="../tag/java/">JAVA</a>, <a href="../tag/3sum/">3Sum</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>It takes a while to figure out the solution on O(n^2) with no extra spaces. The idea is that loop the array to make each of integer as target, check the other two integers in the rest of array if it is sum to the negatives of the target, add these three integers into result list.</p>
+
+<p>There is another Hashtable solution for 3Sum which is a transform from 2Sum solution. But it needs extra spaces.</p>
+
+<p>Pay attention to,</p>
+
+<ul>
+<li>check boundary as always</li>
+<li>Duplicated solution</li>
+<li>Move pointer smart</li>
+</ul>
+
+<p>Question, <br>
+Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.</p>
+
+<p>Solution,</p>
+
+<pre><code>public class ThreeSum {
+
+/** 
+ * @author Min
+ * @date May 13, 2015
+ * @return void 
+ * @throws 
+ */
+public static void main(String[] args) {
+    // TODO Auto-generated method stub
+    int[] input = {-2,0,1,1,2};
+    threeSum(input);
+}
+ public static List&lt;List&lt;Integer&gt;&gt; threeSum(int[] nums) {
+        List&lt;List&lt;Integer&gt;&gt; result = new  ArrayList&lt;List&lt;Integer&gt;&gt;();
+        if(nums.length&lt;3)
+        {
+            return result;
+        }
+        Arrays.sort(nums);
+        for(int i=0;i&lt;nums.length-2;i++)
+        {
+            //Avoid duplicated calculation if neighbors are the same
+            if(i==0 || nums[i]&gt;nums[i-1])
+            {
+                int neg = -nums[i];
+                int start = i+1;
+                int end = nums.length-1;
+                while(start&lt;end)
+                {
+                    if((nums[start]+nums[end])==neg)
+                    {
+                        List&lt;Integer&gt; each = new ArrayList&lt;Integer&gt;();
+                        each.add(nums[i]);
+                        each.add(nums[start]);
+                        each.add(nums[end]);
+                        start++;
+                        end--;
+                        //avoid duplicate solution
+                        if(!result.contains(each))
+                        {
+                            result.add(each);
+                        }
+                    }
+                    //if 
+                    else if(nums[start]+nums[end]&lt;neg)
+                    {
+                        start++;
+                    }
+                    else
+                    {
+                        end--;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
+</code></pre>
+	    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mintechandlife';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/mxia/">mxia</a></h4>
+
+                    <p>Read <a href="../author/mxia/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=Three%20Sum%20O(n%5E2)%20Solution&amp;url=http://localhost:2368/three-sum-solution/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/three-sum-solution/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/three-sum-solution/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story no-cover" href="../be-careful-on-contains-method/">
+        <section class="post">
+            <h2>Be careful on contains() method</h2>
+            <p>It is very important to understand how to use contains() method in Map/Set, otherwise unexpected result you may…</p>
+        </section>
+    </a>
+    <a class="read-next-story prev no-cover" href="../new-start-in-2015/">
+        <section class="post">
+            <h2>New Start In 2015</h2>
+            <p>All my happy starts with my beautiful wife and cute son!…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="../">Tech and Life</a> © 2016</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <!-- You can safely delete this line if your theme does not require jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=678f7c93a2"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=678f7c93a2"></script>
+    <script type="text/javascript" src="../assets/js/prism.js?v=678f7c93a2"></script>
+</body>

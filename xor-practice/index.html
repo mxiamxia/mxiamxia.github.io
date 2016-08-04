@@ -1,0 +1,207 @@
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>xor operation practice</title>
+    <meta name="description" content="">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="../favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="../assets/css/screen.css?v=678f7c93a2">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic%7COpen+Sans:700,400">
+    <link rel="stylesheet" type="text/css" href="../assets/css/prism.css?v=678f7c93a2"> 
+
+    <link rel="canonical" href="index.html">
+    <meta name="referrer" content="origin-when-cross-origin">
+    
+    <meta property="og:site_name" content="Tech and Life">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="xor operation practice">
+    <meta property="og:description" content="Code snippet without using xor operation, if ((dividend &amp;gt; 0 &amp;amp;&amp;amp; divisor &amp;gt; 0) || (dividend &amp;lt; 0 &amp;amp;&amp;amp; divisor &amp;lt; 0))     return ret; else     return -ret; Equivalent code snippet with xor operation return (dividend&amp;gt;0 ^ divisor&amp;gt;0) ? -ret : ret;">
+    <meta property="og:url" content="http://localhost:2368/xor-practice/">
+    <meta property="article:published_time" content="2015-06-02T03:08:36.000Z">
+    <meta property="article:modified_time" content="2015-06-02T03:08:36.000Z">
+    <meta property="article:tag" content="JAVA">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="xor operation practice">
+    <meta name="twitter:description" content="Code snippet without using xor operation, if ((dividend &amp;gt; 0 &amp;amp;&amp;amp; divisor &amp;gt; 0) || (dividend &amp;lt; 0 &amp;amp;&amp;amp; divisor &amp;lt; 0))     return ret; else     return -ret; Equivalent code snippet with xor operation return (dividend&amp;gt;0 ^ divisor&amp;gt;0) ? -ret : ret;">
+    <meta name="twitter:url" content="http://localhost:2368/xor-practice/">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="mxia">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="JAVA">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Tech and Life",
+        "logo": "http://localhost:2368/ghost/img/ghosticon.jpg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "mxia",
+        "url": "http://localhost:2368/author/mxia/",
+        "sameAs": []
+    },
+    "headline": "xor operation practice",
+    "url": "http://localhost:2368/xor-practice/",
+    "datePublished": "2015-06-02T03:08:36.000Z",
+    "dateModified": "2015-06-02T03:08:36.000Z",
+    "keywords": "JAVA",
+    "description": "Code snippet without using xor operation, if ((dividend &amp;gt; 0 &amp;amp;&amp;amp; divisor &amp;gt; 0) || (dividend &amp;lt; 0 &amp;amp;&amp;amp; divisor &amp;lt; 0))     return ret; else     return -ret; Equivalent code snippet with xor operation return (dividend&amp;gt;0 ^ divisor&amp;gt;0) ? -ret : ret;"
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.9">
+    <link rel="alternate" type="application/rss+xml" title="Tech and Life" href="../rss/index.html">
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62982905-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55770ac61cd13df8" async="async"></script>
+</head>
+<body class="post-template tag-java nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="index.html#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+            <li class="nav-home" role="presentation"><a href="../">Home</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="../rss/index.rss">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+            <a class="menu-button icon-menu" href="index.html#"><span class="word">Menu</span></a>
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post tag-java">
+
+        <header class="post-header">
+            <h1 class="post-title">xor operation practice</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-06-02">02 June 2015</time>  on <a href="../tag/java/">JAVA</a>
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>Code snippet without using xor operation,</p>
+
+<pre><code>if ((dividend &gt; 0 &amp;&amp; divisor &gt; 0) || (dividend &lt; 0 &amp;&amp; divisor &lt; 0))
+    return ret;
+else
+    return -ret;
+</code></pre>
+
+<p>Equivalent code snippet with xor operation</p>
+
+<pre><code>return (dividend&gt;0 ^ divisor&gt;0) ? -ret : ret; 
+</code></pre>
+	    <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'mintechandlife';
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="../author/mxia/">mxia</a></h4>
+
+                    <p>Read <a href="../author/mxia/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=xor%20operation%20practice&amp;url=http://localhost:2368/xor-practice/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:2368/xor-practice/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://localhost:2368/xor-practice/" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story no-cover" href="../two-way-to-implement-hashtable-chaining-and-open-address/">
+        <section class="post">
+            <h2>Two way to implement Hashtable - Chaining and Open Address</h2>
+            <p>Interface     public interface HashTable {     //向散列表中插入一个关键字为theKey的元素obj，若成功返回真否则返回假     boolean insert(Object theKey, Object obj);     //向散列表中查找并返回给定关键字theKey对应的元素，若查找失败返回空     Object search(Object theKey);     //从散列表中删除关键字为theKey的元素，…</p>
+        </section>
+    </a>
+    <a class="read-next-story prev no-cover" href="../be-careful-on-contains-method/">
+        <section class="post">
+            <h2>Be careful on contains() method</h2>
+            <p>It is very important to understand how to use contains() method in Map/Set, otherwise unexpected result you may…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="../">Tech and Life</a> © 2016</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <!-- You can safely delete this line if your theme does not require jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <script type="text/javascript" src="../assets/js/jquery.fitvids.js?v=678f7c93a2"></script>
+    <script type="text/javascript" src="../assets/js/index.js?v=678f7c93a2"></script>
+    <script type="text/javascript" src="../assets/js/prism.js?v=678f7c93a2"></script>
+</body>
